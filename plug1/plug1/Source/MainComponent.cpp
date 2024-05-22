@@ -1,14 +1,33 @@
 #include "MainComponent.h"
+#include <iostream>
+#include <fstream>
 
 //==============================================================================
 MainComponent::MainComponent()
 {
-    setSize (1200, 800);
+    setSize (674, 641);
 }
 
 MainComponent::~MainComponent()
 {
 }
+juce::Image loadImage(const juce::File& imf){
+    
+    if(!imf.existsAsFile()){
+        DBG("File does not exist");
+    }
+    
+    std::unique_ptr<juce::FileInputStream> inputStream(imf.createInputStream());
+    juce::Image image = juce::ImageFileFormat::loadFrom(*inputStream);
+    
+    if (image.isNull())
+        {
+            DBG("Failed to load image");
+        }
+
+    return image;
+}
+
 
 //==============================================================================
 void MainComponent::paint (juce::Graphics& g)
@@ -18,8 +37,22 @@ void MainComponent::paint (juce::Graphics& g)
 
     g.setFont (juce::Font (16.0f));
     g.setColour (juce::Colours::white);
-    g.drawText ("First Plug LESSGO", getLocalBounds(), juce::Justification::centred, true);
+    
+    //reads in pic as absolute path
+    juce::File imageFile("/Users/devwork/Desktop/Projects/plug1/plug1/Pic/scales.jpg");
+    
+    juce::Image i = loadImage(imageFile);
+    
+    
+    
+    
+    
+    
+    
+    g.drawImageAt(i, 0, 0);
+   // g.drawText ("First Plug LESSGO", getLocalBounds(), juce::Justification::centred, true);
 }
+
 
 void MainComponent::resized()
 {
