@@ -39,9 +39,16 @@ void MainComponent::paint (juce::Graphics& g)
     g.setColour (juce::Colours::white);
     
     //reads in pic as absolute path
-    juce::File imageFile("/Users/devwork/Desktop/Projects/plug1/plug1/Pic/scales.jpg");
+ //   juce::File imageFile("/Users/devwork/Desktop/Projects/plug1/plug1/Pic/scales.jpg");
     
-    juce::Image i = loadImage(imageFile);
+    juce::File execFile = juce::File::getSpecialLocation(juce::File::currentExecutableFile);
+    juce::File execDirectory = execFile.getParentDirectory().getParentDirectory().getParentDirectory().getParentDirectory().getParentDirectory().getParentDirectory().getParentDirectory().getParentDirectory();
+    
+    juce::File imageFile2 = execDirectory.getChildFile("Pic/scales.jpg");
+
+ //   DBG(imageFile2.getFullPathName());
+    
+    juce::Image i = loadImage(imageFile2);
     
     
     
