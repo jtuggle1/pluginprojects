@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.28)
+project(ProjectName)
+function(my_func)
+  set (app "dog" PARENT_SCOPE)
+endfunction()
+my_func()
+message(STATUS "${app}")
